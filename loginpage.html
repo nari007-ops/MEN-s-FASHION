@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+        .login-container {
+            width: 100%;
+            max-width: 400px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #555;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #333;
+        }
+        .error-message {
+            color: red;
+            font-size: 12px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .success-message {
+            color: green;
+            font-size: 12px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        .toggle-form {
+            text-align: center;
+            margin-top: 15px;
+        }
+        .toggle-form a {
+            color: #333;
+            text-decoration: none;
+        }
+        .toggle-form a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <h1 id="form-title">Login</h1>
+        
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="login-username">Username:</label>
+                <input type="text" id="login-username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="login-password">Password:</label>
+                <input type="password" id="login-password" name="password" required>
+            </div>
+            <div class="error-message" id="loginMessage"></div>
+            <button type="submit">Login</button>
+        </form>
+
+        <form id="registerForm" style="display: none;">
+            <div class="form-group">
+                <label for="register-username">New Username:</label>
+                <input type="text" id="register-username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="register-password">New Password:</label>
+                <input type="password" id="register-password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="confirm-password">Confirm Password:</label>
+                <input type="password" id="confirm-password" name="confirm-password" required>
+            </div>
+            <div class="error-message" id="registerMessage"></div>
+            <button type="submit">Create Account</button>
+        </form>
+
+        <div class="toggle-form">
+            <a href="#" id="toggle-link">Don't have an account? Create one!</a>
+        </div>
+    </div>
+
+    <script>
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const toggleLink = document.getElementById('toggle-link');
+        const formTitle = document.getElementById('form-title');
+
+        // Toggle between login and registration forms
+        toggleLink.addEventListener('click', (event) => {
+            event.preventDefault();
+            if (loginForm.style.display === 'none') {
+                loginForm.style.display = 'block';
+                registerForm.style.display = 'none';
+                formTitle.textContent = 'Login';
+                toggleLink.textContent = "Don't have an account? Create one!";
+            } else {
+                loginForm.style.display = 'none';
+                registerForm.style.display = 'block';
+                formTitle.textContent = 'Create Account';
+                toggleLink.textContent = "Already have an account? Login here!";
+            }
+        });
+
+        // Function to handle user registration
+        registerForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const username = document.getElementById('register-username').value;
+            const password = document.getElementById('register-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            const messageElement = document.getElementById('registerMessage');
+
+            if (password !== confirmPassword) {
+                messageElement.className = 'error-message';
+                messageElement.textContent = "Passwords do not match.";
+                return;
+            }
+
+            // Retrieve existing users from local storage
+            let users = JSON.parse(localStorage.getItem('users')) || [];
+
+            // Check if username already exists
+            const userExists = users.find(user => user.username === username);
+            if (userExists) {
+                messageElement.className = 'error-message';
+                messageElement.textContent = "Username already exists.";
+                return;
+            }
+
+            // Add the new user
+            users.push({ username, password });
+            localStorage.setItem('users', JSON.stringify(users));
+
+            messageElement.className = 'success-message';
+            messageElement.textContent = "Account created successfully! You can now log in.";
+            
+            // Clear the form
+            registerForm.reset();
+        });
+
+        // Function to handle user login
+        loginForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const username = document.getElementById('login-username').value;
+            const password = document.getElementById('login-password').value;
+            const messageElement = document.getElementById('loginMessage');
+
+            // Retrieve existing users from local storage
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+
+            // Find the user with matching credentials
+            const user = users.find(user => user.username === username && user.password === password);
+            
+            if (user) {
+                messageElement.className = 'success-message';
+                messageElement.textContent = "Login successful!";
+                // In a real application, you would redirect the user here
+                // window.location.href = '/dashboard.html';
+            } else {
+                messageElement.className = 'error-message';
+                messageElement.textContent = "Incorrect username or password.";
+            }
+        });
+    </script>
+
+</body>
+</html>
