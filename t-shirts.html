@@ -1,0 +1,98 @@
+<html>
+    <head>
+    <title>eCommerce Product Page</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .product-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        .product {
+            flex: 1 1 200px;
+            margin: 10px;
+            box-sizing: border-box;
+        }
+        img {
+            width: 100%;
+            height: auto;
+        }
+        header {
+                background-color: #f2f2f2; /* Change this to your desired background color */
+                padding: 20px;
+            }
+            footer {
+                background-color: #f2f2f2; /* Change this to your desired background color */
+                text-align: center;
+                padding: 20px;
+            }
+            body {
+                margin: 0;
+                font-family: Arial, sans-serif;
+            }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>FASHION FORWARD</h1>
+            <nav>
+                <ul>
+                    <li><a href="homepage.html">Home</a></li>
+                    <li><a href="#new-arrivals">New Arrivals</a></li>
+                    <li><a href="#best-sellers">Best Sellers</a></li>
+                    <li><a href="#sale">Sale</a></li>
+                </ul>
+                <div class="cart-icon"></div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="product-container">
+        <!-- Products -->
+        <section class="product" id="product1">
+            <img src="https://i.pinimg.com/736x/dd/7c/1f/dd7c1f49bcaeddc602e6bda801235bf1.jpg" alt="Pro1">
+            <h2>Product 1</h2>
+            <p class="price">$19.99</p>
+            <button class="add-to-cart" onclick="addToCart('Product 1', 19.99, 'https://i.pinimg.com/736x/dd/7c/1f/dd7c1f49bcaeddc602e6bda801235bf1.jpg')">Add to Cart</button>
+        </section>
+        <section class="product" id="product2">
+            <img src="https://images.meesho.com/images/products/391471926/dblcr_512.jpg" alt="Pro2">
+            <h2>Product 2</h2>
+            <p class="price">$21.99</p>
+            <button class="add-to-cart" onclick="addToCart('Product 2', 21.99, 'https://images.meesho.com/images/products/391471926/dblcr_512.jpg')">Add to Cart</button>
+        </section>
+        <section class="product" id="product3">
+            <img src="https://triprindia.com/cdn/shop/files/TBRHNFUL-D1443_800x.jpg?v=1738823402" alt="Pro3">
+            <h2>Product 3</h2>
+            <p class="price">$24.99</p>
+            <button class="add-to-cart" onclick="addToCart('Product 3', 24.99, 'https://triprindia.com/cdn/shop/files/TBRHNFUL-D1443_800x.jpg?v=1738823402')">Add to Cart</button>
+        </section>
+        <section class="product" id="product4">
+            <img src="https://tfiyuvatha.in/cdn/shop/files/mahesh_bob.png?v=1749211535" alt="Pro4">
+            <h2>Product 4</h2>
+            <p class="price">$24.99</p>
+            <button class="add-to-cart" onclick="addToCart('Product 4', 24.99, 'https://tfiyuvatha.in/cdn/shop/files/mahesh_bob.png?v=1749211535')">Add to Cart</button>
+        </section>
+        <!-- Additional eCommerce sections if needed -->
+    </main>
+    
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+    <footer>
+        <p>© 2023 Our Online Store. All rights reserved.</p>
+    </footer>
+    <script>
+        function addToCart(name, price, image) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.push({ name, price, image });
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(`${name} added to cart!`);
+        }
+    </script>
+
+</body></html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eCommerce Product Page</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .product-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        .product {
+            flex: 1 1 200px;
+            margin: 10px;
+            box-sizing: border-box;
+        }
+        img {
+            width: 100%;
+            height: auto;
+        }
+        header {
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+        footer {
+            background-color: #f2f2f2;
+            text-align: center;
+            padding: 20px;
+        }
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>FASHION FORWARD</h1>
+            <nav>
+                <ul>
+                    <li><a href="Home.html">Home</a></li>
+                    <li><a href="#new-arrivals">New Arrivals</a></li>
+                    <li><a href="#best-sellers">Best Sellers</a></li>
+                    <li><a href="#sale">Sale</a></li>
+                </ul>
+                <div class="cart-icon"></div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="product-container">
+        <!-- Products -->
+        <section class="product" id="product1">
+            <img src="https://assets.ajio.com/medias/sys_master/root/20240716/q251/6696aca91d763220fac86475/-1117Wx1400H-466747617-pink-MODEL6.jpg" alt="Pro1">
+            <h2>Product 1</h2>
+            <p class="price">$19.99</p>
+            <button class="add-to-cart" onclick="addToCart('Product 1', 19.99, 'https://assets.ajio.com/medias/sys_master/root/20240716/q251/6696aca91d763220fac86475/-1117Wx1400H-466747617-pink-MODEL6.jpg')">Add to Cart</button>
+        </section>
+        <section class="product" id="product2">
+            <img src="https://assets.ajio.com/medias/sys_master/root/20240507/mdc0/663a557116fd2c6e6af0ef6f/-473Wx593H-467293008-brown-MODEL.jpg" alt="Pro2">
+            <h2>Product 2</h2>
+            <p class="price">$21.99</p>
+            <button class="add-to-cart" onclick="addToCart('Product 2', 21.99, 'https://assets.ajio.com/medias/sys_master/root/20240507/mdc0/663a557116fd2c6e6af0ef6f/-473Wx593H-467293008-brown-MODEL.jpg')">Add to Cart</button>
+        </section>
+        <section class="product" id="product3">
+            <img src="https://assets.myntassets.com/w_412,q_60,dpr_2,fl_progressive/assets/images/12947242/2022/7/20/81b5ec74-ddad-40cb-b001-84092b3c59e81658313317671-Roadster-Men-Green--Blue-Regular-Fit-Checked-Casual-Sustaina-1.jpg" alt="Pro3">
+            <h2>Product 3</h2>
+            <p class="price">$24.99</p>
+            <button class="add-to-cart" onclick="addToCart('Product 3', 24.99, 'https://assets.myntassets.com/w_412,q_60,dpr_2,fl_progressive/assets/images/12947242/2022/7/20/81b5ec74-ddad-40cb-b001-84092b3c59e81658313317671-Roadster-Men-Green--Blue-Regular-Fit-Checked-Casual-Sustaina-1.jpg')">Add to Cart</button>
+        </section>
+        <section class="product" id="product4">
+            <img src="https://maniaclife.com/cdn/shop/products/MN24-CARGO-SHIRT-FS-GREEN-CROCHET_2.jpg?v=1739800637&width=1500" alt="Pro4">
+            <h2>Product 4</h2>
+            <p class="price">$9.99</p>
+            <button class="add-to-cart" onclick="addToCart('Product 4', 9.99, 'https://maniaclife.com/cdn/shop/products/MN24-CARGO-SHIRT-FS-GREEN-CROCHET_2.jpg?v=1739800637&width=1500')">Add to Cart</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2023 Our Online Store. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function addToCart(name, price, image) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.push({ name, price, image });
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(`${name} added to cart!`);
+        }
+    </script>
+</body>
+</html>

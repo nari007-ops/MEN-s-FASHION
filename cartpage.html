@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body { font-family: Arial, sans-serif; background-color: #f5f5f5; margin: 0; padding: 0; }
+    .cart-container { width: 80%; margin: auto; background-color: #fff; padding: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    h1, h2 { color: #333; }
+    .cart-summary { margin-top: 20px; padding-top: 20px; border-top: 1px solid #ddd; }
+    .cart-summary p { margin: 5px 0; }
+    .checkout-btn { margin-top: 10px; width: 100%; padding: 10px; background-color: #ff6f61; border: none; color: #fff; cursor: pointer; transition: background-color 0.3s ease; }
+    .checkout-btn:hover { background-color: #ff3d2e; }
+    .payment-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .payment-modal div {
+      background-color: #fff;
+      color: #333;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .payment-modal img {
+      width: 200px;
+      margin: 20px 0;
+    }
+    .payment-modal button {
+      background-color: #ff6f61;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .payment-modal button:hover {
+      background-color: #ff3d2e;
+    }
+    .card-details input {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="cart-container">
+    <h1>Shopping Cart</h1>
+    <div id="cart-items"></div>
+    <div class="cart-summary">
+      <h2>Order Summary</h2>
+      <p id="total-items">Total Items: 0</p>
+      <p id="total-price">Total Price: $0.00</p>
+      <button class="checkout-btn" onclick="showPaymentOptions()">Proceed to Checkout</button>
+    </div>
+  </div>
+
+  <!-- Payment Modal -->
+  <div class="payment-modal" id="payment-modal">
+    <div id="payment-content"></div>
+  </div>
+
+  <script>
+    let cart = [];
+
+    function updateCart() {
+      const cartItemsContainer = document.getElementById('cart-items');
+      cartItemsContainer.innerHTML = '';
+      let totalItems = 0;
+      let totalPrice = 0;
+
+      cart.forEach(item => {
+        const cartItem = document.createElement('div');
+        cartItem.classList.add('cart-item');
+
+        cartItem.innerHTML = `
+          <div class="item-info">
+            <img src="${item.image}" alt="Item Image">
+            <div class="item-details">
+              <h2>${item.name}</h2>
+            </div>
+          </div>
+          <div class="item-price">
+            <p>$${item.price.toFixed(2)}</p>
+            <button class="remove-btn" onclick="removeFromCart('${item.name}')">Remove</button>
+          </div>
+        `;
+
+        cartItemsContainer.appendChild(cartItem);
+
+        totalItems++;
+        totalPrice += item.price;
+      });
+
+      document.getElementById('total-items').textContent = `Total Items: ${totalItems}`;
+      document.getElementById('total-price').textContent = `Total Price: $${totalPrice.toFixed(2)}`;
+    }
+
+    function removeFromCart(itemName) {
+      cart = cart.filter(item => item.name !== itemName);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCart();
+    }
+
+    function showPaymentOptions() {
+      const modal = document.getElementById('payment-modal');
+      const content = document.getElementById('payment-content');
+
+      content.innerHTML = `
+        <h2>Select Payment Method</h2>
+        <button onclick="showQR('Phone Pay')">Phone Pay</button>
+        <button onclick="showQR('Paytm')">Paytm</button>
+        <button onclick="showCard()">Card</button>
+        <button onclick="closeModal()">Cancel</button>
+      `;
+      modal.style.display = 'flex';
+    }
+
+    function showQR(method) {
+      const content = document.getElementById('payment-content');
+
+      content.innerHTML = `
+        <h2>${method} QR Code</h2>
+        <img src="https://via.placeholder.com/200" alt="QR Code">
+        <button onclick="orderPlaced()">Done</button>
+      `;
+    }
+
+    function showCard() {
+      const content = document.getElementById('payment-content');
+
+      content.innerHTML = `
+        <h2>Enter Card Details</h2>
+        <div class="card-details">
+          <input type="text" placeholder="Card Number">
+          <input type="text" placeholder="Expiry Date (MM/YY)">
+          <input type="text" placeholder="CVV">
+          <button onclick="orderPlaced()">Pay</button>
+        </div>
+      `;
+    }
+
+    function orderPlaced() {
+      alert('Order Placed Successfully!');
+      closeModal();
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('payment-modal');
+      modal.style.display = 'none';
+    }
+
+    window.onload = function() {
+      if (localStorage.getItem('cart')) {
+        cart = JSON.parse(localStorage.getItem('cart'));
+        updateCart();
+      }
+    };
+
+    window.onbeforeunload = function() {
+      localStorage.setItem('cart', JSON.stringify(cart));
+    };
+  </script>
+</body>
+</html>

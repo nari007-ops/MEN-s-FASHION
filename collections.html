@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Men's Collections</title>
+    <link rel="stylesheet" href="styles.css">
+    <style> 
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .collections {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+
+        .collection {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 10px;
+            width: 200px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .collection:hover {
+            transform: scale(1.05);
+        }
+
+        .collection img {
+            width: 100%;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .collection h2 {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Men's Collections</h1>
+    </header>
+    <section class="collections">
+        <div class="collection" onclick="window.location.href='/collection/shirts'">
+            <h2>Shirts</h2>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUB0Z7YkdMJ8fJZM-fdFsuruWpbyD2vzmBIA&s" alt="Shirts">
+        </div>
+        <div class="collection" onclick="window.location.href='/collection/tshirts'">
+            <h2>T-Shirts</h2>
+            <img src="https://cdn.gulte.com/wp-content/uploads/2020/12/Mahesh-Babu.jpeg" alt="T-Shirts">
+        </div>
+        <div class="collection" onclick="window.location.href='/collection/hoodies'">
+            <h2>Hoodies</h2>
+            <img src="https://i.etsystatic.com/41396797/r/il/c64bf4/5277996851/il_1080xN.5277996851_5hh2.jpg" alt="Hoodies">
+        </div>
+        <div class="collection" onclick="window.location.href='/collection/semi-formal-pants'">
+            <h2>Semi-Formal Pants</h2>
+            <img src="https://i.ebayimg.com/images/g/PFkAAOSwL55nX-kJ/s-l1200.jpg" alt="Semi Formal Pants">
+        </div>
+        <div class="collection" onclick="window.location.href='/collection/jogger'">
+            <h2>Jogger</h2>
+            <img src="https://assets.myntassets.com/h_1440,q_100,w_1080/v1/assets/images/2024/AUGUST/5/SdTJtn9I_66bdb026f8ba482cb2d936caea868119.jpg" alt="Jogger">
+        </div>
+        <div class="collection" onclick="window.location.href='/collection/slim-fit'">
+            <h2>Slim Fit</h2>
+            <img src="https://5.imimg.com/data5/SELLER/Default/2022/8/JB/LE/DE/81138207/klaudia-piaskowska-zy6onzrdcjc-unsplash-1-jpg-500x500.jpg" alt="Slim Fit">
+        </div>
+        <div class="collection" onclick="window.location.href='/collection/cargo'">
+            <h2>Cargo</h2>
+            <img src="https://i.redd.it/2y0keu3lnvz91.jpg" alt="Cargo Pants">
+        </div>
+        <div class="collection" onclick="window.location.href='/collection/trouser'">
+            <h2>Trouser</h2>
+            <img src="https://www.punekarcotton.com/cdn/shop/files/olive-green-color-cotton-trouser-pants-for-men-932248.jpg?v=1721237995" alt="Trouser">
+        </div>
+        <div class="collection" onclick="window.location.href='/collection/chinos'">
+            <h2>Chinos</h2>
+            <img src="https://imagescdn.louisphilippe.com/img/app/product/8/892166-10819410.jpg?auto=format&w=390" alt="Chinos">
+        </div>
+        <div class="collection" onclick="window.location.href='/collection/jeans'">
+            <h2>Jeans</h2>
+            <img src="https://5.imimg.com/data5/SELLER/Default/2022/8/JB/LE/DE/81138207/klaudia-piaskowska-zy6onzrdcjc-unsplash-1-jpg-500x500.jpg" alt="Jeans">
+        </div>
+    </section>
+</body>
+</html>

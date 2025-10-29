@@ -1,0 +1,98 @@
+<html>
+    <head>
+    <title>eCommerce Product Page</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .product-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        .product {
+            flex: 1 1 200px;
+            margin: 10px;
+            box-sizing: border-box;
+        }
+        img {
+            width: 100%;
+            height: auto;
+        }
+        header {
+                background-color: #f2f2f2; /* Change this to your desired background color */
+                padding: 20px;
+            }
+            footer {
+                background-color: #f2f2f2; /* Change this to your desired background color */
+                text-align: center;
+                padding: 20px;
+            }
+            body {
+                margin: 0;
+                font-family: Arial, sans-serif;
+            }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>FASHION FORWARD</h1>
+            <nav>
+                <ul>
+                    <li><a href="Home.html">Home</a></li>
+                    <li><a href="#new-arrivals">New Arrivals</a></li>
+                    <li><a href="#best-sellers">Best Sellers</a></li>
+                    <li><a href="#sale">Sale</a></li>
+                </ul>
+                <div class="cart-icon"></div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="product-container">
+        <!-- Products -->
+        <section class="product" id="product1">
+            <img src="https://assets.myntassets.com/h_1440,q_100,w_1080/v1/assets/images/21203458/2023/1/2/06271946-be59-476d-bb62-0b4d81c961611672651142670-Roadster-Men-Sweatshirts-91672651142282-1.jpg" alt="Pro1">
+            <h2>Product 1</h2>
+            <p class="price">$19.99</p>
+            <button class="add-to-cart" onclick="addToCart('Product 1', 19.99, 'https://assets.myntassets.com/h_1440,q_100,w_1080/v1/assets/images/21203458/2023/1/2/06271946-be59-476d-bb62-0b4d81c961611672651142670-Roadster-Men-Sweatshirts-91672651142282-1.jpg')">Add to Cart</button>
+        </section>
+        <section class="product" id="product2">
+            <img src="https://i.pinimg.com/736x/6d/47/0a/6d470a0c998ae3b81c8f609f0220831d.jpg" alt="Pro2">
+            <h2>Product 2</h2>
+            <p class="price">$21.99</p>
+            <button class="add-to-cart" onclick="addToCart('Product 2', 21.99, 'https://i.pinimg.com/736x/6d/47/0a/6d470a0c998ae3b81c8f609f0220831d.jpg')">Add to Cart</button>
+        </section>
+        <section class="product" id="product3">
+            <img src="https://assets.myntassets.com/w_412,q_60,dpr_2,fl_progressive/assets/images/22823960/2024/4/29/fcd34d1a-f5a6-40cd-be88-524998c00e411714371800948-Roadster-Men-Jackets-2011714371800366-1.jpg" alt="Pro3">
+            <h2>Product 3</h2>
+            <p class="price">$24.99</p>
+            <button class="add-to-cart" onclick="addToCart('Product 3', 24.99, 'https://assets.myntassets.com/w_412,q_60,dpr_2,fl_progressive/assets/images/22823960/2024/4/29/fcd34d1a-f5a6-40cd-be88-524998c00e411714371800948-Roadster-Men-Jackets-2011714371800366-1.jpg')">Add to Cart</button>
+        </section>
+        <section class="product" id="product4">
+            <img src="https://www.beyoung.in/api/cache/catalog/products/new_shirt_upload_21_10_2022/rust_orange_mission_doodle_printed_hoodie_base_17_12_2024_400x533.jpg" alt="Pro4">
+            <h2>Product 4</h2>
+            <p class="price">$9.99</p>
+            <button class="add-to-cart" onclick="addToCart('Product 4', 9.99, 'https://www.beyoung.in/api/cache/catalog/products/new_shirt_upload_21_10_2022/rust_orange_mission_doodle_printed_hoodie_base_17_12_2024_400x533.jpg')">Add to Cart</button>
+        </section>
+        <!-- Additional eCommerce sections if needed -->
+    </main>
+    
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+    <footer>
+        <p>© 2023 Our Online Store. All rights reserved.</p>
+    </footer>
+    <script>
+        function addToCart(name, price, image) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.push({ name, price, image });
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(`${name} added to cart!`);
+        }
+    </script>
+
+</body></html>
